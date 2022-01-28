@@ -1,0 +1,33 @@
+#token-list {
+    background: #00000006;
+}
+.sagepayserver-token {
+    &-add {
+        text-transform: capitalize;
+    }
+}
+#sagepaysuiteserver-tokens{
+    width: 50%;
+}
+#sagepay-server-notice-iframe {
+    margin-top: 1em;
+}
+
+
+@media (max-width: 810px){
+    #sagepaysuiteserver-tokens{
+        width: 100%;
+    }
+    #token-list {
+        width: 100%;
+    }
+}
+
+@media (min-width: 811px) and (max-width: 1250px) and (-webkit-min-device-pixel-ratio: 1) {
+    #sagepaysuiteserver-tokens{
+        width: 35em;
+    }
+    #token-list {
+        width: 100%;
+    }
+}

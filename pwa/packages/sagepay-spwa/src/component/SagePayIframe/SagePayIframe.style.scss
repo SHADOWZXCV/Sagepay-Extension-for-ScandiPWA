@@ -1,0 +1,13 @@
+#sagepay-iframe {
+    position: fixed;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    z-index: 11111111111;
+    height: 100vh;
+    top: 0;
+    background: #00000060;
+    iframe {
+        width: 90%;
+    }
+}

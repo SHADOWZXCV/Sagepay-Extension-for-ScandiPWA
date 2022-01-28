@@ -366,6 +366,7 @@ return [
         'ScandiPWA_SampleData' => 1,
         'ScandiPWA_SliderGraphQl' => 1,
         'Temando_ShippingRemover' => 1,
+        'Scandiweb_SagePaySuiteGraphQl' => 1,
         'Vertex_Tax' => 1,
         'Vertex_AddressValidationApi' => 1,
         'Vertex_RequestLoggingApi' => 1,

@@ -1,0 +1,49 @@
+#/**
+# * @category    Scandiweb
+# * @package     Scandiweb_SagePaySuiteGraphQl
+# * @author      Ezzeldin Husen <info@scandiweb.com>
+# * @copyright   Copyright (c) 2022 Scandiweb, Ltd (https://scandiweb.com)
+# */
+
+type Query {
+    getTokens: Tokens @resolver(class: "Scandiweb\\SagePaySuiteGraphQl\\Model\\Resolver\\SagePayServerConfig")
+    getNextUrl(isSignedIn: Boolean, cartId: String, token_id: String, save_token: Boolean): NextUrl @resolver(class: "Scandiweb\\SagePaySuiteGraphQl\\Model\\Resolver\\GetNextUrl")
+}
+
+type Mutation {
+        deleteToken(token_id: String): TokenDeleted @resolver(class: "Scandiweb\\SagePaySuiteGraphQl\\Model\\Resolver\\DeleteToken")
+}
+
+type TokenDeleted {
+    TokenRemovalStatus: Boolean
+}
+type Tokens {
+    tokens_enabled: String
+    tokens: [Token]
+}
+
+type Token {
+    id: String
+    customer_id: String
+    cc_last_4: String
+    cc_type: String
+    cc_exp_month: String
+    cc_exp_year: String
+}
+
+type NextUrl {
+    data: NextUrlData
+    errors: String
+}
+
+type NextUrlData {
+    status: Int
+    data: NextUrlInfo
+}
+
+type NextUrlInfo {
+    VPSTxId: String
+    SecurityKey: String
+    NextURL: String
+    VendorName: String
+}

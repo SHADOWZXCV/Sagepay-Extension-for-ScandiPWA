@@ -1,0 +1,17 @@
+.MyAccountMyCreditCards {
+    margin: 0;
+    margin-block-end: 12px;
+    min-width: 100%;
+    font-size: 14px;
+
+    @include mobile {
+        margin-block-end: 14px;
+    }
+
+    &-Table {
+        width: 100%;
+    }
+    &-NoReturns {
+        text-align: center;
+    }
+}
