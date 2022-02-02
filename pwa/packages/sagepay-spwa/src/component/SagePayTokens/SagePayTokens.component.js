@@ -12,9 +12,9 @@
 import PropTypes from 'prop-types';
 import { PureComponent } from 'react';
 
-import FIELD_TYPE from 'Component/Field/Field.config';
-import Field from 'SourceComponent/Field';
 import Loader from 'SourceComponent/Loader';
+import Field from 'SourceComponent/PureForm/Field';
+import FIELD_TYPE from 'SourceComponent/PureForm/Field/Field.config';
 import { isSignedIn } from 'Util/Auth';
 
 import SagePayToken from '../SagePayToken';

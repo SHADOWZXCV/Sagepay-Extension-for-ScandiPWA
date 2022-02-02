@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import { PureComponent } from 'react';
 
-import FIELD_TYPE from 'Component/Field/Field.config';
+import FIELD_TYPE from 'SourceComponent/PureForm/Field/Field.config';
 
 import './MySavedCreditCardsRow.style.scss';
 

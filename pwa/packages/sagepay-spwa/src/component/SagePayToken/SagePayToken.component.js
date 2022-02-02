@@ -9,9 +9,9 @@
 import PropTypes from 'prop-types';
 import { PureComponent } from 'react';
 
-import FIELD_TYPE from 'Component/Field/Field.config';
-import Field from 'SourceComponent/Field';
+import FIELD_TYPE from 'Component/PureForm/Field/Field.config';
 import Image from 'SourceComponent/Image';
+import Field from 'SourceComponent/PureForm/Field';
 
 import './SagePayToken.style.scss';
 
