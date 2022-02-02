@@ -8,7 +8,7 @@
         "@scandipwa/eslint-config": "0.1.31",
         "@tilework/mosaic": "0.1.4",
         "@tilework/mosaic-craco": "0.0.5",
-        "sagepay-spwa": "file:packages/sagepay-spwa"
+        "@scandipwa/sagepay-spwa": "file:packages/sagepay-spwa"
     },
     "scandipwa": {
         "type": "theme",
@@ -17,7 +17,7 @@
         },
         "parentTheme": "@scandipwa/scandipwa",
         "extensions": {
-            "sagepay-spwa": true
+            "@scandipwa/sagepay-spwa": true
         }
     },
     "scripts": {

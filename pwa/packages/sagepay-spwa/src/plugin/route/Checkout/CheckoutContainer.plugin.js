@@ -36,6 +36,7 @@ class CheckoutContainerPlugin {
 
      savePaymentMethodAndPlaceOrder = (args, callback, instance) => {
          const [paymentInformation] = args;
+
          const { paymentMethod: { code } } = paymentInformation;
          if (code !== SAGEPAY_SERVER) {
              return callback.apply(instance, args);

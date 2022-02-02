@@ -17,6 +17,7 @@ export const getInitialState = () => ({
 /** @namespace SagepaySpwa/Store/SagePayServerTokens/Reducer/SagePayTokensReducer */
 export const SagePayTokensReducer = (state = getInitialState(), action) => {
     const { type } = action;
+
     switch (type) {
     case TOGGLE_SAVE_CARDS:
         const { saveCards } = action;

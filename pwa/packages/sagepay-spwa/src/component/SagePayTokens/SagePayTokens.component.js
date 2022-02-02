@@ -37,12 +37,12 @@ export class SagePayTokensComponent extends PureComponent {
 
     renderLoader() {
         const { isLoading } = this.props;
+
         return <Loader isLoading={ isLoading } />;
     }
 
     renderSagePayTokensContainer() {
         const { tokens, setSelectedCard, toggleSaveCards } = this.props;
-
         const isCustomerSignedIn = isSignedIn();
         if (!isCustomerSignedIn) {
             setSelectedCard('');
@@ -113,6 +113,7 @@ export class SagePayTokensComponent extends PureComponent {
 
     renderSagePayToken(token, key) {
         const { setSelectedCard, selectedCreditCard, deleteToken } = this.props;
+
         return (
             <SagePayToken
               token={ token }
@@ -158,6 +159,7 @@ export class SagePayTokensComponent extends PureComponent {
 
     renderCreditCardsNotice() {
         const { saveCards } = this.props;
+
         return (
             <h4>
             You will

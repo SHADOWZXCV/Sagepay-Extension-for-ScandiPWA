@@ -4,6 +4,7 @@
          display: flex;
          padding: 0 2.5em 0 2.5em;
          width: 100%;
+
          &-p{
              width: 70%;
              padding-top: 5px;
@@ -12,18 +13,21 @@
              padding-left: 1em;
              margin: 0;
             }
+
             &-delete {
                 width: 20%;
                 display: flex;
                 justify-content: right;
             }
+
             .Field {
                 margin-top: 0;
             }
-        }
-        .Image_ratio {
-            &_custom-sagepay-card {
-                width: 20%;
-                height: 25px;
-            }
-        }
+}
+
+.Image_ratio {
+    &_custom-sagepay-card {
+    width: 20%;
+    height: 25px;
+    }
+}
