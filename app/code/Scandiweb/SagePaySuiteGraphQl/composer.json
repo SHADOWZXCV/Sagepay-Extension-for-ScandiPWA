@@ -1,0 +1,26 @@
+{
+  "name": "Scandiweb/SagePaySuiteGraphQl",
+  "description": "This extension enables functionality of official sagepay server integration into ScandiPWA themes",
+  "type": "magento2-module",
+  "license": [
+    "OSL-3.0"
+  ],
+	"authors": [
+        {
+            "name": "Scandiweb",
+            "email": "info@scandiweb.com"
+        }
+  ],
+  "require": {
+    "Ebizmarts/SagePaySuite": "^1.2.8"
+  },
+  "version": "1.0.0",
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Scandiweb\\SagePaySuiteGraphQl\\": ""
+    }
+  }
+}
