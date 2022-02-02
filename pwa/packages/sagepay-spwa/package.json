@@ -1,7 +1,12 @@
 {
     "name": "@scandipwa/sagepay-spwa",
-    "version": "0.0.0",
+    "description": "sagepay server integration compatibility with SPWA 5.1.1",
+    "version": "1.0.0",
     "license": "OSL-3.0",
+    "author": {
+        "name": "Scandiweb",
+        "email": "info@scandiweb.com"
+    },
     "scandipwa": {
         "type": "extension"
     },

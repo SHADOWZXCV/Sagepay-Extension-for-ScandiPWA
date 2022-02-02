@@ -1,1 +1,1 @@
-# ExtensionTemplate
+# SagePay server compatibility for SPWA extension
