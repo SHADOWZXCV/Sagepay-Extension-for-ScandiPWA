@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    Scandiweb
+ * @package     Scandiweb_SagePaySuiteGraphQl
+ * @author      Ezzeldin Husen <info@scandiweb.com>
+ * @copyright   Copyright (c) 2022 Scandiweb, Ltd (https://scandiweb.com)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Scandiweb_SagePaySuiteGraphQl" setup_version="1.0.0">
+        <sequence>
+            <module name="Ebizmarts_SagePaySuite"/>
+            <module name="ScandiPWA_Route717" />
+        </sequence>
+    </module>
+</config>

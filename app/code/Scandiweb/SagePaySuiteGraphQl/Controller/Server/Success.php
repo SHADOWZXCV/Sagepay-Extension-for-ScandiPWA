@@ -1,0 +1,122 @@
+<?php
+/**
+ * @category    ScandiWeb
+ * @author      ScandiWeb Team <info@scandiweb.com>
+ * @package     ScandiWeb_SagePaySuiteGraphQl
+ * @copyright   Copyright (c) 2022 Scandiweb, Ltd (https://scandiweb.com)
+ */
+
+namespace Scandiweb\SagePaySuiteGraphQl\Controller\Server;
+
+use Ebizmarts\SagePaySuite\Model\Logger\Logger;
+use Ebizmarts\SagePaySuite\Model\ObjectLoader\OrderLoader;
+use Magento\Checkout\Model\Session;
+use Magento\Framework\App\Action\Context;
+use Magento\Framework\Controller\Result\RedirectFactory;
+use Magento\Framework\Encryption\EncryptorInterface;
+use Magento\Quote\Model\QuoteRepository;
+use Psr\Log\LoggerInterface;
+
+class Success extends \Ebizmarts\SagePaySuite\Controller\Server\Success
+{
+
+    /**
+     * Logging instance
+     * @var \Ebizmarts\SagePaySuite\Model\Logger\Logger
+     */
+    private $suiteLogger;
+
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
+     * @var Session
+     */
+    private $checkoutSession;
+
+    /**
+     * @var QuoteRepository
+     */
+    private $quoteRepository;
+
+    /**
+     * @var EncryptorInterface
+     */
+    private $encryptor;
+
+    /**
+     * @var OrderLoader
+     */
+    private $orderLoader;
+
+    /**
+     * @var RedirectFactory
+     */
+    protected $resultRedirectFactory;
+
+    /**
+     * Success constructor.
+     * @param Context $context
+     * @param Logger $suiteLogger
+     * @param LoggerInterface $logger
+     * @param Session $checkoutSession
+     * @param QuoteRepository $quoteRepository
+     * @param EncryptorInterface $encryptor
+     * @param OrderLoader $orderLoader
+     * @param RedirectFactory $resultRedirectFactory
+     */
+    public function __construct(
+        Context $context,
+        Logger $suiteLogger,
+        LoggerInterface $logger,
+        Session $checkoutSession,
+        QuoteRepository $quoteRepository,
+        EncryptorInterface $encryptor,
+        OrderLoader $orderLoader,
+        RedirectFactory $resultRedirectFactory
+    ) {
+        parent::__construct($context, $suiteLogger, $logger, $checkoutSession, $quoteRepository, $encryptor, $orderLoader, $resultRedirectFactory);
+
+        $this->suiteLogger     = $suiteLogger;
+        $this->logger          = $logger;
+        $this->checkoutSession = $checkoutSession;
+        $this->quoteRepository = $quoteRepository;
+        $this->encryptor        = $encryptor;
+        $this->orderLoader      = $orderLoader;
+        $this->resultRedirectFactory   =  $resultRedirectFactory;
+    }
+
+    public function execute()
+    {
+        try {
+            $request = $this->getRequest();
+            $this->suiteLogger->debugLog($request->getParams(), [__METHOD__, __LINE__]);
+
+            $storeId = $request->getParam("_store");
+            $quoteId = $this->encryptor->decrypt($request->getParam("quoteid"));
+
+            $quote = $this->quoteRepository->get($quoteId, [$storeId]);
+
+            $order = $this->orderLoader->loadOrderFromQuote($quote);
+
+            //prepare session to success page
+            $this->checkoutSession->clearHelperData();
+            $this->checkoutSession->setLastQuoteId($quote->getId());
+            $this->checkoutSession->setLastSuccessQuoteId($quote->getId());
+            $this->checkoutSession->setLastOrderId($order->getEntityId());
+            $this->checkoutSession->setLastRealOrderId($order->getIncrementId());
+            $this->checkoutSession->setLastOrderStatus($order->getStatus());
+
+            //remove order pre-saved flag from checkout
+            $this->checkoutSession->setData(\Ebizmarts\SagePaySuite\Model\Session::PRESAVED_PENDING_ORDER_KEY, null);
+            $this->checkoutSession->setData(\Ebizmarts\SagePaySuite\Model\Session::CONVERTING_QUOTE_TO_ORDER, 0);
+            $this->suiteLogger->orderEndLog($order->getIncrementId(), $quoteId, $order->getPayment()->getLastTransId());
+        } catch (\Exception $e) {
+            $this->logger->critical($e);
+            $this->messageManager->addError(__('An error ocurred.'));
+        }
+        return $this->resultRedirectFactory->create()->setPath('checkout/success?sagepay-server-order-id=' . $order->getIncrementId(), ['_secure' => true]);
+    }
+}

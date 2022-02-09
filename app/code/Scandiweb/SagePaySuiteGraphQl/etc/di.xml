@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    Scandiweb
+ * @package     Scandiweb_SagePaySuiteGraphQl
+ * @author      Ezzeldin Husen <info@scandiweb.com>
+ * @copyright   Copyright (c) 2022 Scandiweb, Ltd (https://scandiweb.com)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+        <virtualType name="ScandiPWA\Router\Controller\ConfigurableRouter" type="ScandiPWA\Router\Controller\Router">
+            <arguments>
+               <argument name="ignoredURLs" xsi:type="array">
+                   <item name="SagePayRecoverUrl" xsi:type="string">^/sagepaysuite/cart/recover.*</item>
+                   <item name="SagePaySuccessUrl" xsi:type="string">^/sagepaysuite/server/success/_store/[0-9]*/.*</item>
+                   <item name="SagePayRedirectToSuccessUrl" xsi:type="string">^/sagepaysuite/server/redirectToSuccess/_store/[0-9]*/.*</item>
+                   <item name="SagePayNotifyUrl" xsi:type="string">^/sagepaysuite/server/notify/_store/[0-9]*/.*</item>
+                   <item name="SagePayCancelUrl" xsi:type="string">^/sagepaysuite/server/cancel/_store/[0-9]*/.*</item>
+               </argument>
+            </arguments>
+        </virtualType>
+        <preference
+	    	for="Ebizmarts\SagePaySuite\Controller\Server\Success"
+		    type="Scandiweb\SagePaySuiteGraphQl\Controller\Server\Success"
+    	/>
+        <preference
+		    for="Ebizmarts\SagePaySuite\Controller\Server\Cancel"
+		    type="Scandiweb\SagePaySuiteGraphQl\Controller\Server\Cancel"
+    	/>
+</config>
